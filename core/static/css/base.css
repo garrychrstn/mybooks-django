@@ -1,0 +1,52 @@
+/* ============================== VARIABLE ============================== */
+:root {
+    --text: #02010d;
+    --background: #f3f2fe;
+    --primary: #2f27ce;
+    --secondary: #f478e6;
+    --accent: #f256a6;
+} 
+/* ============================== GLOBAL ============================== */
+body {
+    background-color: var(--background);
+}
+* { margin: 0; padding: 0; }
+a, h1, h2, h3, h4, h5, span, p {
+    font-family: century-gothic, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-decoration: none;
+    color: var(--text);
+}
+li { list-style: none; }
+
+/* ============================== NAVBAR ============================== */
+header, section {
+    width: 80%;
+    margin: auto;
+}
+
+/* ============================== NAVBAR ============================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 40px;
+    font-size: 20px; 
+    align-items: flex-end;
+    border-bottom: 6px double black;
+}
+/* ============================== HERO ============================== */
+.hero {
+    width: 60%;
+    text-align: center;
+    font-size: 40px;
+    margin-top: 120px;
+}
+.menu {
+    text-align: center;
+    margin-top: 60px;
+}
+.menu ul {
+    display: flex;
+    justify-content: space-evenly;
+}

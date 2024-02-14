@@ -12,12 +12,18 @@ class Books(models.Model):
     tl_type = models.CharField(
         max_length=20,
         null=True, 
-        choices=TRANSLATION_STATUS
+        choices=TRANSLATION_BY
+    )
+    series_status = models.CharField(
+        max_length=20,
+        choices=SERIES_STATUS,
+        default=ONG
     )
     source = models.CharField(max_length=100) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
     reading_status = models.CharField(
         max_length=20,
-        choices=READING_STATUS
+        choices=READING_STATUS,
+        default=TOR
     )
     current_progress = models.CharField( # For tracking how many chapter have been read
         max_length=30,
