@@ -16,7 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.contrib.auth import views as auth_views
 
+app_name = 'core'
 urlpatterns = [
-    path('', views.info_landing, name='landing'),
+    path('', views.index, name='index'),
+    path('login/', views.login_request, name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('profile/', views.profile, name='profile'),
+    path('books/', views.books, name='books')
 ]

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Login | Mabu
+{% endblock%}
+
+{% block content %}
+
+    <section class='login'>
+        <h1>Login Mabu</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type='submit'>submit</button>
+        </form>
+    </section>
+
+{% endblock %}
