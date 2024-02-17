@@ -37,5 +37,5 @@ READING_STATUS = (
     (ONH, "ON-HOLD"),
     (FIN, "FINISH"),
     (NOR, "NOT YET READ"),
-    (TOR, "TO RAED")
+    (TOR, "TO READ")
 )

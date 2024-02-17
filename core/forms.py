@@ -23,4 +23,4 @@ class UserProfile(forms.ModelForm):
 class AddBooks(forms.ModelForm):
     class Meta:
         model = Books
-        fields = '__all__'
+        exclude = ["owner"]

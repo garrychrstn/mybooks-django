@@ -50,21 +50,31 @@ def books(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             author = form.cleaned_data['author']
+            author_nationality = form.cleaned_data['author_nationality']
+            author_medsos = form.cleaned_data['author_medsos']
+            book_type = form.cleaned_data['book_type']
             tl_type = form.cleaned_data['tl_type']
             series_status = form.cleaned_data['series_status']
             source = form.cleaned_data['source']
             reading_status = form.cleaned_data['reading_status']
             current_progress = form.cleaned_data['current_progress']
         
-        user.books_set.create(title=title, author=author, tl_type=tl_type, series_status=series_status, source=source, reading_status=reading_status, current_progress=current_progress)
-        user.save()
-        context = { 'user' : user, 'form' : form }
-        return render(request, 'books.html', context)
+            user.books_set.create(title=title, author=author, author_nationality=author_nationality, author_medsos=author_medsos, book_type=book_type, tl_type=tl_type, series_status=series_status, source=source, reading_status=reading_status, current_progress=current_progress)
+            
+            context = { 'user' : user, 'form' : form }
+            messages.success(request, 'Library have been updated')
+            return HttpResponseRedirect('/books/')
+        else:
+            context = { 'user' : user, 'form' : form }
+            return render(request, 'books.html', context)
     
     else:
         form = AddBooks()
         context = { 'user' : user, 'form' : form }
-    return render(request, 'books.html', context)    
+        return render(request, 'books.html', context)    
 
 def profile(request):
     pass
+
+def success(response):
+    return render(response, 'success.html')

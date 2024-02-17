@@ -10,7 +10,7 @@ class Books(models.Model):
     author = models.CharField(
         max_length=40,
     )
-    auhor_nationality = models.CharField(max_length=20, default='Japanese')
+    author_nationality = models.CharField(max_length=20, default='Japanese')
     author_medsos = models.CharField(max_length=30, default='None')
     book_type = models.CharField(
         max_length=10,

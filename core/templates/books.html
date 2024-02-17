@@ -2,11 +2,26 @@
 {% load static %}
 
 {% block title %}
-    Mabu
+    Add Books | {{ user.username }}
 {% endblock %}
 
 {% block content %}
     <section class='addbooks'>
         <h1>Hey {{ user.username }}</h1>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type='submit'>submit</button>
+        </form>
     </section>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+<!-- Your form HTML goes here -->
+
 {% endblock %}
