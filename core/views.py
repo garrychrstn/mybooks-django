@@ -45,21 +45,27 @@ def books(request):
     user = request.user
     
     if request.method == 'POST':
-        form = AddBooks(request.POST)
+        form = AddBooks(request.POST, request.FILES)
         
         if form.is_valid():
-            title = form.cleaned_data['title']
-            author = form.cleaned_data['author']
-            author_nationality = form.cleaned_data['author_nationality']
-            author_medsos = form.cleaned_data['author_medsos']
-            book_type = form.cleaned_data['book_type']
-            tl_type = form.cleaned_data['tl_type']
-            series_status = form.cleaned_data['series_status']
-            source = form.cleaned_data['source']
-            reading_status = form.cleaned_data['reading_status']
-            current_progress = form.cleaned_data['current_progress']
-        
-            user.books_set.create(title=title, author=author, author_nationality=author_nationality, author_medsos=author_medsos, book_type=book_type, tl_type=tl_type, series_status=series_status, source=source, reading_status=reading_status, current_progress=current_progress)
+            # title = form.cleaned_data['title']
+            # author = form.cleaned_data['author']
+            # author_nationality = form.cleaned_data['author_nationality']
+            # author_medsos = form.cleaned_data['author_medsos']
+            # book_type = form.cleaned_data['book_type']
+            # tl_type = form.cleaned_data['tl_type']
+            # series_status = form.cleaned_data['series_status']
+            # source = form.cleaned_data['source']
+            # reading_status = form.cleaned_data['reading_status']
+            # current_progress = form.cleaned_data['current_progress']
+            # cover = form.files['cover']
+            # if cover:
+            #     cover.save(f"cover/{user.username}/{title}/{cover.name}")
+
+            # user.books_set.create(title=title, author=author, author_nationality=author_nationality, author_medsos=author_medsos, book_type=book_type, tl_type=tl_type, series_status=series_status, source=source, reading_status=reading_status, current_progress=current_progress, cover=cover.name)
+            owner = user
+            form.instance.owner = owner
+            form.save()
             
             context = { 'user' : user, 'form' : form }
             messages.success(request, 'Library have been updated')

@@ -37,6 +37,7 @@ class Books(models.Model):
         max_length=30,
         null=True
     )
+    cover = models.FileField(upload_to='cover/', default='cover/default.png')
 
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
 # This'll be useful to build a library database.
