@@ -31,8 +31,23 @@
                 <a href='/login/'>join us</a>
             {% endif %}
         </header>
-        {% block content %}
-        
-        {% endblock %}
+        <section class='settings'>
+            <h2>menu</h2>
+            <div class='menu-profile'>
+
+                <div class='map'>
+                    <ul>
+                        {% block active %}
+                        <li><a href='#'>profile</a></li>
+                        <li><a href='#'>library</a></li>
+                        <li><a href='#'>add books</a></li>
+                        {% endblock %}
+                    </ul>
+                </div>
+
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
     </body>
 </html>

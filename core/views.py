@@ -13,10 +13,10 @@ from . models import *
 # Create your views here.
 
 def index(response):
-    username = None
+    user = None
     if response.user.is_authenticated:
-        username = response.user.username
-    return render(response, 'index.html', {'username' : username})
+        user = response.user
+    return render(response, 'index.html', {'user' : user})
 
 def login_request(request):
     if request.method == 'POST':

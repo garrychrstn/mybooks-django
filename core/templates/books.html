@@ -1,19 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'menubase.html' %}
 {% load static %}
 
 {% block title %}
     Add Books | {{ user.username }}
 {% endblock %}
 
-{% block content %}
-    <section class='addbooks'>
-        <h1>Hey {{ user.username }}</h1>
+{% block active %}
+    <li><a href='#'>profile</a></li>
+    <li><a href='#'>library</a></li>
+    <li><a href='#' class='menu-active'>add books</a></li>
+{% endblock %}             
+
+{% block content %}   
+<div class='content'>
+    <div class='addbooks'>
         <form method='POST'>
             {% csrf_token %}
             {{ form.as_p }}
-            <button type='submit'>submit</button>
+            <button class='button' type='submit'>submit</button>
         </form>
-    </section>
+    </div>
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -21,7 +27,6 @@
             {% endfor %}
         </ul>
     {% endif %}
-
-<!-- Your form HTML goes here -->
+</div>
 
 {% endblock %}
