@@ -39,6 +39,10 @@ class Books(models.Model):
     )
     cover = models.FileField(upload_to='cover/', default='cover/default.png')
 
+class Review(models.Model):
+    books = models.ForeignKey('Books', on_delete=models.CASCADE, null=True)
+    review = models.TextField()
+
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
 # This'll be useful to build a library database.
 class Archive(models.Model):
@@ -46,7 +50,6 @@ class Archive(models.Model):
     auhor_nationality = models.CharField(max_length=20)
     author_medsos = models.CharField(max_length=30)    
     books = models.CharField(max_length=30)
-
 
 
 

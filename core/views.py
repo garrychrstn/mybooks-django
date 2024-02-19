@@ -72,12 +72,21 @@ def books(request):
             return HttpResponseRedirect('/books/')
         else:
             context = { 'user' : user, 'form' : form }
-            return render(request, 'books.html', context)
+            return render(request, 'user_books.html', context)
     
     else:
         form = AddBooks()
         context = { 'user' : user, 'form' : form }
-        return render(request, 'books.html', context)    
+        return render(request, 'user_books.html', context)    
+
+def library(request):
+    user = request.user
+    user_books = user.books_set.all()
+    context = {
+        'user' : user,
+        'user_books' : user_books
+    }
+    return render(request, 'user_library.html', context)
 
 def profile(request):
     pass

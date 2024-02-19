@@ -1,0 +1,24 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block title %}
+    Library | {{ user.username }}
+{% endblock %}
+
+{% block active %}
+    <li><a href='#'>profile</a></li>
+    <li class='user-active'><a href='#'>library</a></li>
+    <li><a href='#'>add books</a></li>
+{% endblock %}             
+
+{% block content %}   
+<div class='content'>
+    <div class='lib-container'>
+        {% for book in user_books %}
+        <h1> cover : {{ book.cover }}</h1>
+        <img src={{ book.cover.url }} height='200'>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

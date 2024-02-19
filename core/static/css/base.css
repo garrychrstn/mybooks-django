@@ -25,7 +25,7 @@ li { list-style: none; }
     color: var(--background);
     border: none;
 }
-.menu-active {
+.user-active {
      border-right: 2px solid black; 
 }
 /* ============================== INPUT ============================== */
@@ -128,16 +128,16 @@ header {
 /* ============================== BOOKS PAGE ========================= */
 /* =================================================================== */
 .settings h2 { margin-bottom: 20px; }
-.menu-profile {
+.user {
     display: flex;
     margin: auto;
     /* justify-content: space-evenly; */
 }
-.menu-profile .map { 
+.user .map { 
     flex: 1; 
 }
-.menu-profile .map li { margin-bottom: 10px; }
-.menu-profile .map a { padding-right: 20px; }
-.menu-profile .content {flex: 3; }
-.menu-profile form p { margin-bottom: 20px; display: flex; width: 80%; justify-content: space-between;}
-.menu-profile form input { width: 70%; }
+.user .map li { margin-bottom: 10px; width: 50%; }
+.user .map a { padding-right: 20px; }
+.user .content {flex: 3; }
+.user form p { margin-bottom: 20px; display: flex; width: 80%; justify-content: space-between;}
+.user form input { width: 70%; }

@@ -1,4 +1,4 @@
-{% extends 'menubase.html' %}
+{% extends 'user_base.html' %}
 {% load static %}
 
 {% block title %}
@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block active %}
-    <li><a href='#'>profile</a></li>
-    <li><a href='#'>library</a></li>
-    <li><a href='#' class='menu-active'>add books</a></li>
+    <li><a href='/profile'>profile</a></li>
+    <li><a href='/library'>library</a></li>
+    <li class='user-active'><a href='#'>add books</a></li>
 {% endblock %}             
 
 {% block content %}   
