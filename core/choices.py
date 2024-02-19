@@ -13,6 +13,7 @@ ONH = "ON-HOLD"
 FIN = "FINISH"
 NOR = "NOT YET READ"
 TOR = "TO READ"
+REA = "READING"
 
 #SERIES_STATUS 
 FINE = "FINISH"
@@ -37,5 +38,6 @@ READING_STATUS = (
     (ONH, "ON-HOLD"),
     (FIN, "FINISH"),
     (NOR, "NOT YET READ"),
-    (TOR, "TO READ")
+    (TOR, "TO READ"),
+    (REA, "READING")
 )

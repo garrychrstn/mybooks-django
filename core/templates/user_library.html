@@ -13,10 +13,13 @@
 
 {% block content %}   
 <div class='content'>
+    <h3>{{ user.username }}'s library</h3>
     <div class='lib-container'>
         {% for book in user_books %}
-        <h1> cover : {{ book.cover }}</h1>
-        <img src={{ book.cover.url }} height='200'>
+            <div class='lib-item'>
+                <img src={{ book.cover.url }} width='185'>
+                <p>{{ book.title }}</p>
+            </div>
         {% endfor %}
     </div>
 </div>

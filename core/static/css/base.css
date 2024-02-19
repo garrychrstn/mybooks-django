@@ -125,7 +125,7 @@ header {
 .definition p { margin-left: 100px; }
 
 /* =================================================================== */
-/* ============================== BOOKS PAGE ========================= */
+/* ============================ ADD BOOKS PAGE ======================= */
 /* =================================================================== */
 .settings h2 { margin-bottom: 20px; }
 .user {
@@ -141,3 +141,17 @@ header {
 .user .content {flex: 3; }
 .user form p { margin-bottom: 20px; display: flex; width: 80%; justify-content: space-between;}
 .user form input { width: 70%; }
+
+/* =================================================================== */
+/* ============================== LIBRARY PAGE======================== */
+/* =================================================================== */
+.lib-container {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+.lib-item {
+    text-align: center;
+    margin-right: auto;
+    max-width: 185px;
+}
