@@ -29,4 +29,5 @@ urlpatterns = [
     path('library/', views.library, name='library'),
     path('books/', views.books, name='books'),
     path('success/', views.success, name='success'),
+    path('library/update/', views.update_library, name='update_library'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

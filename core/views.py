@@ -79,6 +79,7 @@ def books(request):
         context = { 'user' : user, 'form' : form }
         return render(request, 'user_books.html', context)    
 
+@login_required
 def library(request):
     user = request.user
     user_books = user.books_set.all()
@@ -88,6 +89,24 @@ def library(request):
     }
     return render(request, 'user_library.html', context)
 
+@login_required
+def update_library(request):
+    user = request.user
+
+    if request.method == 'POST':
+        book_id = request.POST.get('book_id')
+        book = user.books_set.get(pk=book_id)
+
+        context = {
+            'book_id' : book_id,
+            'book' : book
+        }
+        return render(request, 'user_update.html', context)
+    else:
+        return render(request, 'user_update.html')
+
+
+@login_required
 def profile(request):
     pass
 

@@ -38,6 +38,7 @@ class Books(models.Model):
         null=True
     )
     cover = models.FileField(upload_to='cover/', default='cover/default.png')
+    genre = models.CharField(max_length=40, null=True)
 
 class Review(models.Model):
     books = models.ForeignKey('Books', on_delete=models.CASCADE, null=True)
