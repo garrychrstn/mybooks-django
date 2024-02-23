@@ -152,6 +152,17 @@ header {
 }
 .lib-item {
     text-align: center;
-    margin-right: auto;
-    max-width: 185px;
+    margin-right: auto; 
+    max-width: 185px; 
+}
+.lib-item span { 
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.lib-item form button { 
+    display: block;
+    text-align: center;
+    border: none;
+    background: none;
 }

@@ -30,10 +30,14 @@
             <div class='lib-item'>
                 <form method='POST' action="{% url 'core:update_library' %}">
                     {% csrf_token %}
+                    <input type='hidden' name='book_id' value='{{ book.id }}'>
                     <button type='submit'>
-                        <input type='hidden' name='book_id' value='{{ book.id }}'>
                         <img src={{ book.cover.url }} width='185'>
-                        <p>{{ book.title }}</p>
+                        
+                            <span>
+                                {{ book.title }}
+                            </span>
+                        
                     </button>
                 </form>
             </div>
