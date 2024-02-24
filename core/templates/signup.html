@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Create Account | Mabu
+{% endblock%}
+
+{% block content %}
+
+    <section class='signup'>
+        <h1>Create Mabu Account</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type='submit'>submit</button>
+        </form>
+    </section>
+
+{% endblock %}

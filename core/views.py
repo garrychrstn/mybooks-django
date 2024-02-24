@@ -9,7 +9,6 @@ from django.db.models import Prefetch
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from . forms import *
 from . models import *
-
 # Create your views here.
 
 def index(response):
@@ -93,22 +92,54 @@ def library(request):
 def update_library(request):
     user = request.user
 
-    if request.method == 'POST':
-        book_id = request.POST.get('book_id')
-        book = user.books_set.get(pk=book_id)
+    book_id = request.POST.get('book_id')
+    print(f"book id : {book_id}")
+    # book = user.books_set.get(pk=book_id)
+    book = get_object_or_404(user.books_set, pk=book_id)
 
+    if request.method == 'POST':
+        form = UpdateBooks(request.POST, instance=book)
+        if form.is_valid():
+            volume = form.cleaned_data['volume']
+            review = form.cleaned_data['review']
+
+            books.review_set.create(volume=volume, review=review)
+
+
+        context = {
+            'book_id' : book_id,
+            'book' : book,
+            'form' : form
+        }
+        messages.success(request, 'Library have been updated')
+        # return HttpResponseRedirect('/library/update/')
+        return render(request, 'user_update.html', context)
+    else :
         context = {
             'book_id' : book_id,
             'book' : book
         }
         return render(request, 'user_update.html', context)
-    else:
-        return render(request, 'user_update.html')
 
 
 @login_required
 def profile(request):
     pass
+
+def signup(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+        
+            context = { 'form' : form }
+            return redirect('/login/')
+
+    else:
+        form = RegisterForm()
+        
+    return render(request, 'signup.html', { 'form' : form })
+
 
 def success(response):
     return render(response, 'success.html')

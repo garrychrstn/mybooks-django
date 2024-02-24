@@ -3,6 +3,7 @@ from . models import *
 from . choices import *
 from django.forms import inlineformset_factory, formset_factory, ModelForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -24,3 +25,14 @@ class AddBooks(forms.ModelForm):
     class Meta:
         model = Books
         exclude = ["owner"]
+
+class UpdateBooks(forms.ModelForm):
+    class Meta:
+        model = Review
+        exclude = ["books"]
+
+class RegisterForm(UserCreationForm):
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
