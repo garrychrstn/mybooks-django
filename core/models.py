@@ -42,7 +42,7 @@ class Books(models.Model):
 
 class Review(models.Model):
     books = models.ForeignKey('Books', on_delete=models.CASCADE, null=True)
-    volume = models.IntegerField()
+    volume = models.IntegerField(null=True)
     review = models.TextField()
 
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 

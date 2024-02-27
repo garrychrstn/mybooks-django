@@ -47,21 +47,6 @@ def books(request):
         form = AddBooks(request.POST, request.FILES)
         
         if form.is_valid():
-            # title = form.cleaned_data['title']
-            # author = form.cleaned_data['author']
-            # author_nationality = form.cleaned_data['author_nationality']
-            # author_medsos = form.cleaned_data['author_medsos']
-            # book_type = form.cleaned_data['book_type']
-            # tl_type = form.cleaned_data['tl_type']
-            # series_status = form.cleaned_data['series_status']
-            # source = form.cleaned_data['source']
-            # reading_status = form.cleaned_data['reading_status']
-            # current_progress = form.cleaned_data['current_progress']
-            # cover = form.files['cover']
-            # if cover:
-            #     cover.save(f"cover/{user.username}/{title}/{cover.name}")
-
-            # user.books_set.create(title=title, author=author, author_nationality=author_nationality, author_medsos=author_medsos, book_type=book_type, tl_type=tl_type, series_status=series_status, source=source, reading_status=reading_status, current_progress=current_progress, cover=cover.name)
             owner = user
             form.instance.owner = owner
             form.save()
@@ -89,37 +74,61 @@ def library(request):
     return render(request, 'user_library.html', context)
 
 @login_required
-def update_library(request):
+def update_library(request, id):
     user = request.user
-
-    book_id = request.POST.get('book_id')
-    print(f"book id : {book_id}")
-    # book = user.books_set.get(pk=book_id)
-    book = get_object_or_404(user.books_set, pk=book_id)
-
+    book = Books.objects.get(pk=id)
+    print(f"{book.title}")
     if request.method == 'POST':
-        form = UpdateBooks(request.POST, instance=book)
+        form = UpdateBooks(request.POST)
         if form.is_valid():
-            volume = form.cleaned_data['volume']
-            review = form.cleaned_data['review']
-
-            books.review_set.create(volume=volume, review=review)
-
-
+            # volume = form.cleaned_data['volume']
+            # review = form.cleaned_data['review']
+            
+            # book.review_set.create(volume=volume, review=review)
+            form.instance.books = book
+            form.save()
+        
         context = {
-            'book_id' : book_id,
-            'book' : book,
-            'form' : form
-        }
-        messages.success(request, 'Library have been updated')
-        # return HttpResponseRedirect('/library/update/')
-        return render(request, 'user_update.html', context)
-    else :
-        context = {
-            'book_id' : book_id,
+            'form' : form,
             'book' : book
         }
+        messages.success(request, 'Library have been updated')
         return render(request, 'user_update.html', context)
+    else:
+        form = UpdateBooks()
+        return render(request, 'user_update.html', {'form' : form, 'book' : book})
+    
+# BELOW IS FOR FORM TYPE LIBRARY
+# @login_required
+# def update_library(request):
+#     user = request.user
+
+#     if request.method == 'POST':
+#         book_id = request.POST.get('book_id')
+#         print(f"book id : {book_id}")
+#         # book = user.books_set.get(pk=book_id)
+#         if book_id is not None:  
+#             book = get_object_or_404(user.books_set, pk=book_id)
+#             form = UpdateBooks(request.POST)
+#             if form.is_valid():
+#                 thebook = book
+#                 form.instance.book = thebook
+#                 form.save()
+
+#         context = {
+#             # 'book_id' : book_id,
+#             'book' : book,
+#             'form' : form
+#         }
+#         messages.success(request, 'Library have been updated')
+#         # return HttpResponseRedirect('/library/update/')
+#         return render(request, 'user_update.html', context)
+#     else :
+#         context = {
+#             # 'book_id' : book_id,
+#             'book' : book
+#         }
+#         return render(request, 'user_update.html', context)
 
 
 @login_required

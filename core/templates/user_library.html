@@ -28,7 +28,11 @@
     <div class='lib-container'>
         {% for book in user_books %}
             <div class='lib-item'>
-                <form method='POST' action="{% url 'core:update_library' %}">
+                <a href='update/{{ book.id }}'>
+                    <img src={{ book.cover.url }} width='185'>
+                    <span>{{ book.title }}</span>
+                </a>
+                {% comment %} <form method='POST' action="{% url 'core:update_library' %}">
                     {% csrf_token %}
                     <input type='hidden' name='book_id' value='{{ book.id }}'>
                     <button type='submit'>
@@ -39,7 +43,7 @@
                             </span>
                         
                     </button>
-                </form>
+                </form> {% endcomment %}
             </div>
         {% endfor %}
     </div>

@@ -14,11 +14,13 @@
 {% block content %}   
 <div class='content'>
     <h3>{{ book.title }} by {{ book.author }}</h3>
-    <small> _id : {{ book_id }} </small>
+    {% comment %} <small> _id : {{ book_id }} </small>
     <small> id : {{ book }} </small>
+    <small> bookId : {{ bookId }} </small> {% endcomment %}
 
     <form method='POST'>
         {% csrf_token %}
+        <input type='hidden' value='{{ book_id }}' name='id'>
         {{ form.as_p }}
         <button type='submit'>submit</button>
     </form>
