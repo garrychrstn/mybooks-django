@@ -61,7 +61,7 @@ def books(request):
             except ObjectDoesNotExist:
                 owner = user
                 form.instance.owner = owner
-                a = Archive(author=author, author_nationality=an, author_medos=am, books=title)
+                a = Archive(author=author, author_nationality=an, author_medsos=am, books=title)
                 a.save()
                 form.save()
                 
