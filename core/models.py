@@ -49,7 +49,7 @@ class Review(models.Model):
 # This'll be useful to build a library database.
 class Archive(models.Model):
     author = models.CharField(max_length=40)
-    auhor_nationality = models.CharField(max_length=20)
+    author_nationality = models.CharField(max_length=20)
     author_medsos = models.CharField(max_length=30)    
     books = models.CharField(max_length=30)
 

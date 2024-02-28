@@ -7,6 +7,7 @@ from datetime import date, timezone, datetime
 from .forms import *
 from django.db.models import Prefetch
 from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.core.exceptions import ObjectDoesNotExist
 from . forms import *
 from . models import *
 # Create your views here.
@@ -47,13 +48,27 @@ def books(request):
         form = AddBooks(request.POST, request.FILES)
         
         if form.is_valid():
-            owner = user
-            form.instance.owner = owner
-            form.save()
+            title = form.cleaned_data['title']
+            author = form.cleaned_data['author']
+            an = form.cleaned_data['author_nationality']
+            am = form.cleaned_data['author_medsos']
             
-            context = { 'user' : user, 'form' : form }
-            messages.success(request, 'Library have been updated')
-            return HttpResponseRedirect('/books/')
+            try:
+                exist = user.books_set.get(title=title)
+                messages.error(request, "Book with the same title already exist")
+                return HttpResponseRedirect('/books/')
+
+            except ObjectDoesNotExist:
+                owner = user
+                form.instance.owner = owner
+                a = Archive(author=author, author_nationality=an, author_medos=am, books=title)
+                a.save()
+                form.save()
+                
+                context = { 'user' : user, 'form' : form }
+                messages.success(request, 'Library have been updated')
+                return HttpResponseRedirect('/books/')
+
         else:
             context = { 'user' : user, 'form' : form }
             return render(request, 'user_books.html', context)
@@ -81,10 +96,6 @@ def update_library(request, id):
     if request.method == 'POST':
         form = UpdateBooks(request.POST)
         if form.is_valid():
-            # volume = form.cleaned_data['volume']
-            # review = form.cleaned_data['review']
-            
-            # book.review_set.create(volume=volume, review=review)
             form.instance.books = book
             form.save()
         
