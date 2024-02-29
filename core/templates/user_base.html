@@ -22,7 +22,7 @@
                     <button>{{ user.username }}</button>
                     <div class='dropdown-content'>
                         <a href='#'>profile</a>
-                        <a href='#'>library</a>
+                        <a href='/library'>library</a>
                         <a href='/books'>add books</a>
                         <a href='/logout'>logout</a>
                     </div>
@@ -38,9 +38,9 @@
                 <div class='map'>
                     <ul>
                         {% block active %}
-                        <li><a href='#'>profile</a></li>
-                        <li><a href='#'>library</a></li>
-                        <li><a href='#'>add books</a></li>
+                        <li><a href='/profile'>profile</a></li>
+                        <li><a href='/library'>library</a></li>
+                        <li><a href='/books'>add books</a></li>
                         {% endblock %}
                     </ul>
                 </div>

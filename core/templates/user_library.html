@@ -8,12 +8,11 @@
 {% block active %}
     <li><a href='#'>profile</a></li>
     <li class='user-active'><a href='#'>library</a></li>
-    <li><a href='#'>add books</a></li>
+    <li><a href='/books'>add books</a></li>
 {% endblock %}             
 
 {% block content %}   
 <div class='content'>
-    <h3>{{ user.username }}'s library</h3>
     
     <!-- LIBRARY -->
     {% comment %} <div class='lib-container'>
@@ -29,7 +28,7 @@
         {% for book in user_books %}
             <div class='lib-item'>
                 <a href='update/{{ book.id }}'>
-                    <img src={{ book.cover.url }} width='185'>
+                    <img src={{ book.cover.url }} width='185' height='310' style="object-fit: cover;">
                     <span>{{ book.title }}</span>
                 </a>
                 {% comment %} <form method='POST' action="{% url 'core:update_library' %}">

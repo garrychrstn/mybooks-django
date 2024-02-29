@@ -2,6 +2,7 @@
 :root {
     --text: #02010d;
     --background: #f3f2fe;
+    --backgroundShade: #f0f0fc;
     --primary: #2f27ce;
     --secondary: #f478e6;
     --accent: #f256a6;
@@ -11,7 +12,7 @@ body {
     background-color: var(--background);
 }
 * { margin: 0; padding: 0; }
-a, h1, h2, h3, h4, h5, span, p, button {
+a, h1, h2, h3, h4, h5, span, p, button, input, textarea {
     font-family: century-gothic, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -28,6 +29,7 @@ li { list-style: none; }
 .user-active {
      border-right: 2px solid black; 
 }
+input, textarea { outline: none; }
 /* ============================== INPUT ============================== */
 input, select {
     background: var(--background);
@@ -148,22 +150,29 @@ header {
 .lib-container {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 20px;
+    row-gap: 50px;
+    column-gap: 20px;
 }
 .lib-item {
     text-align: center;
-    margin-right: auto; 
     max-width: 185px; 
+    cursor: pointer;
 }
+
 .lib-item span { 
     text-align: center;
     align-items: center;
     justify-content: center;
 }
-.lib-item form button { 
-    display: block;
-    text-align: center;
-    border: none;
-    background: none;
+.lib-item:hover {
+    filter: brightness(50%);
+    transition: all .5s;
 }
 .errorlist { display: none; }
+/* ============================== UPDATE PAGE======================== */
+.update textarea {
+    width: 69%;
+    background: var(--backgroundShade);
+    border: 1px solid black;
+    padding: 10px;
+}
