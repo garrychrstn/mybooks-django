@@ -5,9 +5,9 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your models here.
 class Profile(models.Model):
-    username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    preference = models.TextField
-    blacklist = models.TextField
+    username = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True, related_name='profile')
+    preference = models.TextField(null=True, blank=True)
+    blacklist = models.TextField(null=True, blank=True)
     avatar = models.FileField(upload_to='avatar/', default='avatar/default-avatar.png')
     account_created = models.DateField(null=True, blank=True)
 

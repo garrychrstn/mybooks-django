@@ -147,17 +147,42 @@ def update_library(request, id):
 @login_required
 def profile(request):
     user = request.user
-    
+    profile = user.profile
+    if request.method == 'POST':
+        form = SetProfile(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+        
+        return render(request, 'user_profile.html')
+    else:
+        form = SetProfile(instance=profile)
+                
     context = { 
         'user' : user, 
+        'profile' : profile,
+        'form' : form
     }
     return render(request, 'user_profile.html', context)
-
 def signup(request):
+
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+
             form.save()
+            # after the registration is complete, create a profile set
+            user = User.objects.get(username=username)
+            user.profile_set.create()
+            # automatically login after registration and profile set up complete
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"you are logged as {username}")
+                return redirect("core:index")
+            else:
+                messages.error(request, "Invalid username or password")
         
             context = { 'form' : form }
             return redirect('/login/')

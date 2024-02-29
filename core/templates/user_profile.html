@@ -12,5 +12,12 @@
 {% endblock %}             
 
 {% block content %}
-    
+    <div class='content set-profile'>
+        <h1>Hey {{ profile.username }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type='submit'>update</button>
+        </form>
+    </div>
 {% endblock %}

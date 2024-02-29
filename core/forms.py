@@ -21,6 +21,11 @@ class UserProfile(forms.ModelForm):
         model = User
         fields = ['email', 'first_name', 'last_name']
 
+class SetProfile(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['account_created', 'username']
+
 class AddBooks(forms.ModelForm):
     class Meta:
         model = Books
