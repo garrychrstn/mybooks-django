@@ -146,7 +146,12 @@ def update_library(request, id):
 
 @login_required
 def profile(request):
-    pass
+    user = request.user
+    
+    context = { 
+        'user' : user, 
+    }
+    return render(request, 'user_profile.html', context)
 
 def signup(request):
     if request.method == 'POST':

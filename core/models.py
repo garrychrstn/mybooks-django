@@ -4,6 +4,13 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 # Create your models here.
+class Profile(models.Model):
+    username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    preference = models.TextField
+    blacklist = models.TextField
+    avatar = models.FileField(upload_to='avatar/', default='avatar/default-avatar.png')
+    account_created = models.DateField(null=True, blank=True)
+
 class Books(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=50)

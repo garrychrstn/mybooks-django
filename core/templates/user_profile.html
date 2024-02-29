@@ -1,0 +1,16 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block title %}
+    Add Books | {{ user.username }}
+{% endblock %}
+
+{% block active %}
+    <li class='user-active'><a href='/profile'>profile</a></li>
+    <li><a href='/library'>library</a></li>
+    <li><a href='/books'>add books</a></li>
+{% endblock %}             
+
+{% block content %}
+    
+{% endblock %}
