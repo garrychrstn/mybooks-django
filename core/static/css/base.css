@@ -2,17 +2,17 @@
 :root {
     --text: #02010d;
     --background: #f3f2fe;
-    --backgroundShade: #f0f0fc;
-    --primary: #2f27ce;
-    --secondary: #f478e6;
-    --accent: #f256a6;
+    --backgroundShade: #d1cfe0;
+    --primary: #322996;
+    --secondary: #185083;
+    --accent: #53c87a;
 } 
 /* ============================== GLOBAL ============================== */
 body {
     background-color: var(--background);
 }
 * { margin: 0; padding: 0; }
-a, h1, h2, h3, h4, h5, span, p, button, input, textarea {
+a, h1, h2, h3, h4, h5, span, p, button, input, textarea, small {
     font-family: century-gothic, sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -30,6 +30,10 @@ li { list-style: none; }
      border-right: 2px solid black; 
 }
 input, textarea { outline: none; }
+.primary { color: var(--primary); }
+.secondary { color: var(--secondary); }
+.accent { color: var(--accent); }
+.bold { font-weight: bolder; }
 /* ============================== INPUT ============================== */
 input, select {
     background: var(--background);
@@ -60,7 +64,7 @@ header {
 .dropdown button {
     background: var(--background);
     font-size: 20px;
-    border: none;
+    border: none; 
   }
   
 .dropdown {
@@ -111,7 +115,14 @@ header {
     justify-content: space-evenly;
 }
 /* ============================== ABOUT ============================== */
+.about {
+    background: var(--primary); 
+    border-radius: 20px; 
+    padding: 30px; 
+}
+.about p { color: var(--background); }
 .about h1 { 
+    color: var(--background);
     text-align: center;
     font-size: 40px;
     margin-bottom: 50px;
@@ -125,7 +136,21 @@ header {
 }
 .definition img { border-radius: 5%; }
 .definition p { margin-left: 100px; }
-
+/* ============================== JOIN US ============================== */
+.joinus {
+    padding: 30px; 
+    background: var(--secondary);
+    text-align: center;
+    color: white; 
+    border-radius: 20px; 
+}
+.joinus p, .joinus h1, .joinus small { color: white; }
+.joinus p { margin-bottom: 20px; }
+.joinus a {
+    background: var(--backgroundShade);
+    padding: 10px 15px; 
+    border-radius: 20px; 
+}
 /* =================================================================== */
 /* ============================ ADD BOOKS PAGE ======================= */
 /* =================================================================== */
@@ -170,6 +195,16 @@ header {
 }
 .errorlist { display: none; }
 /* ============================== UPDATE PAGE======================== */
+.history {
+    width: 100%;
+    margin-bottom: 200px;
+}
+.notes { 
+    background: var(--backgroundShade);
+    border: 1px solid black; 
+    padding: 15px; 
+    border-radius: 20px; 
+}
 .update textarea {
     width: 69%;
     background: var(--backgroundShade);

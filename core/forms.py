@@ -28,7 +28,7 @@ class AddBooks(forms.ModelForm):
 
 class UpdateBooks(forms.ModelForm):
     class Meta:
-        model = Review
+        model = Notes
         exclude = ["books"]
 
 class RegisterForm(UserCreationForm):

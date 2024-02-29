@@ -93,6 +93,7 @@ def update_library(request, id):
     user = request.user
     book = Books.objects.get(pk=id)
     print(f"{book.title}")
+    notes = book.notes_set.all().order_by('-volume')
     if request.method == 'POST':
         form = UpdateBooks(request.POST)
         if form.is_valid():
@@ -101,13 +102,14 @@ def update_library(request, id):
         
         context = {
             'form' : form,
-            'book' : book
+            'book' : book,
+            'notes' : notes,
         }
         messages.success(request, 'Library have been updated')
         return render(request, 'user_update.html', context)
     else:
         form = UpdateBooks()
-        return render(request, 'user_update.html', {'form' : form, 'book' : book})
+        return render(request, 'user_update.html', {'form' : form, 'book' : book, 'notes' : notes})
     
 # BELOW IS FOR FORM TYPE LIBRARY
 # @login_required

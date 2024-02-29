@@ -13,13 +13,13 @@
     </head>
     <body>
         <header>
-            <a href='/signup'>sign up</a>
+            <a href='/signup'>follow us</a>
             <a href='/'>
                 <img src={% static 'img/mabu.png' %} height=45>
             </a>
             {% if user %}
                 <div class='dropdown'>
-                    <button>{{ user.username }}</button>
+                    <button class='hover'>{{ user.username }}</button>
                     <div class='dropdown-content'>
                         <a href='/profile'>profile</a>
                         <a href='/library'>library</a>

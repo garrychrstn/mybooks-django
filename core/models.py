@@ -40,10 +40,10 @@ class Books(models.Model):
     cover = models.FileField(upload_to='cover/', default='cover/default.png')
     genre = models.CharField(max_length=40, null=True)
 
-class Review(models.Model):
+class Notes(models.Model):
     books = models.ForeignKey('Books', on_delete=models.CASCADE, null=True)
     volume = models.IntegerField(null=True)
-    review = models.TextField()
+    note = models.TextField()
 
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
 # This'll be useful to build a library database.
