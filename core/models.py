@@ -59,7 +59,12 @@ class Archive(models.Model):
     author_nationality = models.CharField(max_length=20)
     author_medsos = models.CharField(max_length=30)    
     books = models.CharField(max_length=30)
-
+    genre = models.TextField(blank=True, null=True)
+    book_type = models.CharField(
+        max_length=10,
+        null=True,
+        choices=BOOKS_TYPES
+    )
 
 
 

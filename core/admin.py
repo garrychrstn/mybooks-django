@@ -5,3 +5,4 @@ from . models import *
 admin.site.register(Books)
 admin.site.register(Notes)
 admin.site.register(Profile)
+admin.site.register(Archive)

@@ -205,7 +205,7 @@ header {
     padding: 15px; 
     border-radius: 20px; 
 }
-.update textarea {
+textarea {
     width: 69%;
     background: var(--backgroundShade);
     border: 1px solid black;

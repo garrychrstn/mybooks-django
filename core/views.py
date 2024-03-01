@@ -16,6 +16,7 @@ def index(response):
     user = None
     if response.user.is_authenticated:
         user = response.user
+        
     return render(response, 'index.html', {'user' : user})
 
 def login_request(request):
