@@ -10,15 +10,36 @@ class Profile(models.Model):
     blacklist = models.TextField(null=True, blank=True)
     avatar = models.FileField(upload_to='avatar/', default='avatar/default-avatar.png')
     account_created = models.DateField(null=True, blank=True)
+    
 
-class Books(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+# class Book(models.Model):
+#     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+class Note(models.Model):
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)
+    books = models.ForeignKey('Library', on_delete=models.CASCADE, null=True)
+    volume = models.IntegerField(null=True)
+    note = models.TextField()
+    reading_status = models.CharField(
+        max_length=20,
+        choices=READING_STATUS,
+        default=TOR
+    )
+    current_progress = models.CharField( # For tracking how many chapter have been read
+        max_length=30,
+        blank=True, 
+        default='not yet read'
+    )
+
+# Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
+# This'll be useful to build a library database.
+class Library(models.Model):
+    profile = models.ManyToManyField(Profile)
     title = models.CharField(max_length=50)
     author = models.CharField(
-        max_length=40,
+        max_length=50,
     )
-    author_nationality = models.CharField(max_length=20, default='Japanese')
-    author_medsos = models.CharField(max_length=30, default='None')
+    author_medsos = models.CharField(max_length=30, default='none', blank=True)
     book_type = models.CharField(
         max_length=10,
         null=True,
@@ -34,37 +55,8 @@ class Books(models.Model):
         choices=SERIES_STATUS,
         default=ONG
     )
-    source = models.CharField(max_length=100) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
-    reading_status = models.CharField(
-        max_length=20,
-        choices=READING_STATUS,
-        default=TOR
-    )
-    current_progress = models.CharField( # For tracking how many chapter have been read
-        max_length=30,
-        null=True
-    )
-    cover = models.FileField(upload_to='cover/', default='cover/default.png')
-    genre = models.CharField(max_length=40, null=True)
-
-class Notes(models.Model):
-    books = models.ForeignKey('Books', on_delete=models.CASCADE, null=True)
-    volume = models.IntegerField(null=True)
-    note = models.TextField()
-
-# Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
-# This'll be useful to build a library database.
-class Archive(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=40)
-    author_nationality = models.CharField(max_length=20)
-    genre = models.TextField(blank=True, null=True)
-    author_medsos = models.CharField(max_length=30)
-    book_type = models.CharField(
-        max_length=10,
-        null=True,
-        choices=BOOKS_TYPES
-    )
-
+    source = models.CharField(max_length=100, default='none', blank=True) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
+    cover = models.FileField(upload_to='cover/', default='cover/default.png', blank=True)
+    genre = models.CharField(max_length=40, blank=True, null=True)
 
 

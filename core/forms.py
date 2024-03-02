@@ -26,15 +26,15 @@ class SetProfile(forms.ModelForm):
         model = Profile
         exclude = ['account_created', 'username']
 
-class AddBooks(forms.ModelForm):
+class AddBook(forms.ModelForm):
     class Meta:
-        model = Books
-        exclude = ["owner"]
+        model = Library
+        exclude = ['user']
 
-class UpdateBooks(forms.ModelForm):
+class UpdateBook(forms.ModelForm):
     class Meta:
-        model = Notes
-        exclude = ["books"]
+        model = Note
+        exclude = ["Book"]
 
 class RegisterForm(UserCreationForm):
 

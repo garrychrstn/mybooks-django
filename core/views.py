@@ -24,7 +24,7 @@ def index(response):
         for query in queries[1::]:
             combined_pref != query
         
-        filtered_queryset = Archive.objects.filter(combined_pref)
+        filtered_queryset = Library.objects.filter(combined_pref)
         print(f"Prefs : {prefs}\n")
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
@@ -54,63 +54,75 @@ def login_request(request):
     return render(request, 'login.html', {'form' : form})            
 
 @login_required
-def books(request):
+def addBook(request):
     user = request.user
-    
+    p = Profile.objects.get(username=user.username)
+
     if request.method == 'POST':
-        form = AddBooks(request.POST, request.FILES)
+        form = AddBook(request.POST, request.FILES)
         
         if form.is_valid():
             title = form.cleaned_data['title']
             author = form.cleaned_data['author']
-            an = form.cleaned_data['author_nationality']
             am = form.cleaned_data['author_medsos']
-            
+            bt = form.cleaned_data['book_type']
+            tt = form.cleaned_data['tl_type']
+            ss = form.cleaned_data['series_status']
+            # cover = 
+
+            book = Library.objects.get(title=title).exist()
+
+            if book: # Check whether book has already added to Library, if YES then tie the book to user.
+                book.profile.add(p)
+            else: # If book doesn't exist in Library, create a new instance of book then tie it to the user.
+                new_book = Library(title=title, author=author, author_medsos=am, )
             try:
-                exist = user.books_set.get(title=title)
+                exist = Library.objects.get(title=title)
                 messages.error(request, "Book with the same title already exist")
-                return HttpResponseRedirect('/books/')
+                return HttpResponseRedirect('/Book/')
+            
+
 
             except ObjectDoesNotExist:
                 owner = user
                 form.instance.owner = owner
-                a = Archive(title=title, author=author, author_nationality=an, author_medsos=am)
+                a = Library(title=title, author=author, author_nationality=an, author_medsos=am)
                 a.save()
                 form.save()
                 
                 context = { 'user' : user, 'form' : form }
                 messages.success(request, 'Library have been updated')
-                return HttpResponseRedirect('/books/')
+                return HttpResponseRedirect('/Book/')
 
         else:
             context = { 'user' : user, 'form' : form }
-            return render(request, 'user_books.html', context)
+            return render(request, 'user_Book.html', context)
     
     else:
-        form = AddBooks()
+        form = AddBook()
         context = { 'user' : user, 'form' : form }
-        return render(request, 'user_books.html', context)    
+        return render(request, 'user_Book.html', context)    
 
 @login_required
 def library(request):
     user = request.user
-    user_books = user.books_set.all()
+    user_book = user.book_set.all()
     context = {
         'user' : user,
-        'user_books' : user_books
+        'user_book' : user_book
     }
     return render(request, 'user_library.html', context)
 
 @login_required
 def update_library(request, id):
     user = request.user
-    book = Books.objects.get(pk=id)
+    book = Book.objects.get(pk=id)
     print(f"{book.title}")
     notes = book.notes_set.all().order_by('-volume')
     if request.method == 'POST':
-        form = UpdateBooks(request.POST)
+        form = UpdateBook(request.POST)
         if form.is_valid():
-            form.instance.books = book
+            form.instance.Book = book
             form.save()
         
         context = {
@@ -121,7 +133,7 @@ def update_library(request, id):
         messages.success(request, 'Library have been updated')
         return render(request, 'user_update.html', context)
     else:
-        form = UpdateBooks()
+        form = UpdateBook()
         return render(request, 'user_update.html', {'form' : form, 'book' : book, 'notes' : notes})
     
 # BELOW IS FOR FORM TYPE LIBRARY
@@ -132,10 +144,10 @@ def update_library(request, id):
 #     if request.method == 'POST':
 #         book_id = request.POST.get('book_id')
 #         print(f"book id : {book_id}")
-#         # book = user.books_set.get(pk=book_id)
+#         # book = user.book_set.get(pk=book_id)
 #         if book_id is not None:  
-#             book = get_object_or_404(user.books_set, pk=book_id)
-#             form = UpdateBooks(request.POST)
+#             book = get_object_or_404(user.book_set, pk=book_id)
+#             form = UpdateBook(request.POST)
 #             if form.is_valid():
 #                 thebook = book
 #                 form.instance.book = thebook
