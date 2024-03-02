@@ -11,7 +11,9 @@
         <p>this is your preference : {{ user.profile.preference }}</p>
         <p>this is your preference : {{ pref_array }}</p>
         {% for book in filtered_queryset %}
-            <p>book {{ book.title }}</p>
+            {% comment %} <div class='lib-item'>
+                <a href='/book/{{ book.id }}'>
+                 {% endcomment %}
         {% endfor %}
     {% else %}
         <section class='hero'>

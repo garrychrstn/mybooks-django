@@ -25,6 +25,7 @@ def index(response):
             combined_pref != query
         
         filtered_queryset = Archive.objects.filter(combined_pref)
+        # todo : add randomizer reccomendation using `choice`
         print(f"Prefs : {prefs}\n")
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
