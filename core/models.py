@@ -55,11 +55,11 @@ class Notes(models.Model):
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
 # This'll be useful to build a library database.
 class Archive(models.Model):
+    title = models.CharField(max_length=100)
     author = models.CharField(max_length=40)
     author_nationality = models.CharField(max_length=20)
-    author_medsos = models.CharField(max_length=30)    
-    books = models.CharField(max_length=30)
     genre = models.TextField(blank=True, null=True)
+    author_medsos = models.CharField(max_length=30)
     book_type = models.CharField(
         max_length=10,
         null=True,

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from datetime import date, timezone, datetime
 from .forms import *
-from django.db.models import Prefetch
+from django.db.models import Prefetch, Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from . forms import *
@@ -16,8 +16,20 @@ def index(response):
     user = None
     if response.user.is_authenticated:
         user = response.user
+        pref_array = user.profile.preference.split(",") # Create array from preference so it can be used with for loop
+        prefs = [x.strip(' ') for x in pref_array]
+        queries = [Q(genre__contains=pref) for pref in pref_array]
+
+        combined_pref = queries[0]
+        for query in queries[1::]:
+            combined_pref != query
         
-    return render(response, 'index.html', {'user' : user})
+        filtered_queryset = Archive.objects.filter(combined_pref)
+        print(f"Prefs : {prefs}\n")
+        print(f"Queries : {queries}\n")
+        print(f"Combined Pref: {combined_pref}\n")
+        print(f"Filtered Query : {filtered_queryset}")
+    return render(response, 'index.html', {'user' : user, 'pref_array' : pref_array, 'filtered_queryset' : filtered_queryset})
 
 def login_request(request):
     if request.method == 'POST':
@@ -62,7 +74,7 @@ def books(request):
             except ObjectDoesNotExist:
                 owner = user
                 form.instance.owner = owner
-                a = Archive(author=author, author_nationality=an, author_medsos=am, books=title)
+                a = Archive(title=title, author=author, author_nationality=an, author_medsos=am)
                 a.save()
                 form.save()
                 

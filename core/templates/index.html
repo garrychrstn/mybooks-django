@@ -8,6 +8,11 @@
 {% block content %}
     {% if user.is_authenticated %}
         <p>Hey there</p>
+        <p>this is your preference : {{ user.profile.preference }}</p>
+        <p>this is your preference : {{ pref_array }}</p>
+        {% for book in filtered_queryset %}
+            <p>book {{ book.title }}</p>
+        {% endfor %}
     {% else %}
         <section class='hero'>
             <h1>Know your journey, your world, and your adventure</h1>
