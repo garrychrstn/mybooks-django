@@ -56,52 +56,36 @@ def login_request(request):
 @login_required
 def addBook(request):
     user = request.user
-    p = Profile.objects.get(username=user.username)
+    p = Profile.objects.get(username=user.id)
 
     if request.method == 'POST':
         form = AddBook(request.POST, request.FILES)
         
         if form.is_valid():
             title = form.cleaned_data['title']
-            author = form.cleaned_data['author']
-            am = form.cleaned_data['author_medsos']
-            bt = form.cleaned_data['book_type']
-            tt = form.cleaned_data['tl_type']
-            ss = form.cleaned_data['series_status']
-            # cover = 
 
-            book = Library.objects.get(title=title).exist()
-
-            if book: # Check whether book has already added to Library, if YES then tie the book to user.
-                book.profile.add(p)
-            else: # If book doesn't exist in Library, create a new instance of book then tie it to the user.
-                new_book = Library(title=title, author=author, author_medsos=am, )
+            print(f"errc : {title}")
             try:
-                exist = Library.objects.get(title=title)
-                messages.error(request, "Book with the same title already exist")
-                return HttpResponseRedirect('/Book/')
-            
-
-
-            except ObjectDoesNotExist:
-                owner = user
-                form.instance.owner = owner
-                a = Library(title=title, author=author, author_nationality=an, author_medsos=am)
-                a.save()
+                Library.objects.get(title=title).exists() # Check whether book has already added to Library, if YES then tie the book to user
+                book = Library.objects.get(title=title)
+                book.profile.add(p)
+            except ObjectDoesNotExist: # If book doesn't exist in Library, create a new instance of book then tie it to the user.
                 form.save()
-                
-                context = { 'user' : user, 'form' : form }
-                messages.success(request, 'Library have been updated')
-                return HttpResponseRedirect('/Book/')
+                b = Library.objects.get(title=title)
+                b.profile.add(p)
+                                       
+            context = { 'user' : user, 'form' : form }
+            messages.success(request, 'Library have been updated')
+            return HttpResponseRedirect('/books/')
 
         else:
             context = { 'user' : user, 'form' : form }
-            return render(request, 'user_Book.html', context)
+            return render(request, 'user_books.html', context)
     
     else:
         form = AddBook()
         context = { 'user' : user, 'form' : form }
-        return render(request, 'user_Book.html', context)    
+        return render(request, 'user_books.html', context)    
 
 @login_required
 def library(request):

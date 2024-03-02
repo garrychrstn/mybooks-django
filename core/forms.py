@@ -29,7 +29,7 @@ class SetProfile(forms.ModelForm):
 class AddBook(forms.ModelForm):
     class Meta:
         model = Library
-        exclude = ['user']
+        exclude = ['profile']
 
 class UpdateBook(forms.ModelForm):
     class Meta:

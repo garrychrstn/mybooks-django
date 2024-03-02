@@ -36,9 +36,10 @@ class Note(models.Model):
 # This'll be useful to build a library database.
 class Library(models.Model):
     profile = models.ManyToManyField(Profile)
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, null=True)
     author = models.CharField(
         max_length=50,
+        null=True
     )
     author_medsos = models.CharField(max_length=30, default='none', blank=True)
     book_type = models.CharField(
@@ -57,6 +58,6 @@ class Library(models.Model):
         default=ONG
     )
     cover = models.FileField(upload_to='cover/', default='cover/default.png', blank=True)
-    genre = models.CharField(max_length=40, blank=True, null=True)
+    genre = models.CharField(max_length=100, blank=True, null=True)
 
 
