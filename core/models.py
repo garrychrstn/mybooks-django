@@ -30,6 +30,7 @@ class Note(models.Model):
         blank=True, 
         default='not yet read'
     )
+    source = models.CharField(max_length=100, default='none', blank=True) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
 
 # Models containing both Books and Author, so in case User delete a book, database will still have a data about what book is authored by who. 
 # This'll be useful to build a library database.
@@ -55,7 +56,6 @@ class Library(models.Model):
         choices=SERIES_STATUS,
         default=ONG
     )
-    source = models.CharField(max_length=100, default='none', blank=True) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
     cover = models.FileField(upload_to='cover/', default='cover/default.png', blank=True)
     genre = models.CharField(max_length=40, blank=True, null=True)
 
