@@ -7,7 +7,7 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <p>Hey there</p>
+        <p>Hey there, you're currently at many-to-many branch</p>
         <p>this is your preference : {{ user.profile.preference }}</p>
         <p>this is your preference : {{ pref_array }}</p>
         {% for book in filtered_queryset %}
