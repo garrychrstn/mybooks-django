@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 class Note(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)
-    books = models.ForeignKey('Library', on_delete=models.CASCADE, null=True)
+    book = models.ForeignKey('Library', on_delete=models.CASCADE, null=True)
     volume = models.IntegerField(null=True)
     note = models.TextField()
     reading_status = models.CharField(

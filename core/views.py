@@ -69,10 +69,12 @@ def addBook(request):
                 Library.objects.filter(title=title).exists() # Check whether book has already added to Library, if YES then tie the book to user
                 book = Library.objects.get(title=title)
                 book.profile.add(p)
+                Note(profile=p, book=book)
             except ObjectDoesNotExist: # If book doesn't exist in Library, create a new instance of book then tie it to the user.
                 form.save()
                 b = Library.objects.get(title=title)
                 b.profile.add(p)
+                Note(profile=p, book=book)
                                        
             context = { 'user' : user, 'form' : form }
             messages.success(request, 'Library have been updated')
@@ -102,13 +104,18 @@ def library(request):
 @login_required
 def update_library(request, id):
     user = request.user
-    book = Book.objects.get(pk=id)
+    pr = Profile.objects.get(username=user.id)
+    book = Library.objects.get(pk=id)
+    print(f"{book} and {pr}")
+    # update = Note.objects.get(book=book.id, profile=pr.id)
+
     print(f"{book.title}")
-    notes = book.notes_set.all().order_by('-volume')
+    notes = book.note_set.all().order_by('-volume')
     if request.method == 'POST':
         form = UpdateBook(request.POST)
         if form.is_valid():
-            form.instance.Book = book
+            form.instance.book = book
+            form.instance.profile = pr
             form.save()
         
         context = {
