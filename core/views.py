@@ -90,7 +90,9 @@ def addBook(request):
 @login_required
 def library(request):
     user = request.user
-    user_book = user.book_set.all()
+    p = Profile.objects.get(username=user.id)
+    user_book = p.library_set.all()
+    print(user_book)
     context = {
         'user' : user,
         'user_book' : user_book
