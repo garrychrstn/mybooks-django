@@ -66,7 +66,7 @@ def addBook(request):
 
             print(f"errc : {title}")
             try:
-                Library.objects.get(title=title).exists() # Check whether book has already added to Library, if YES then tie the book to user
+                Library.objects.filter(title=title).exists() # Check whether book has already added to Library, if YES then tie the book to user
                 book = Library.objects.get(title=title)
                 book.profile.add(p)
             except ObjectDoesNotExist: # If book doesn't exist in Library, create a new instance of book then tie it to the user.
