@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.exceptions import ObjectDoesNotExist
 from . forms import *
 from . models import *
+import random
 # Create your views here.
 
 def index(response):
@@ -24,7 +25,7 @@ def index(response):
         for query in queries[1::]:
             combined_pref != query
         
-        filtered_queryset = Library.objects.filter(combined_pref)
+        filtered_queryset = Library.objects.filter(combined_pref)[:5]
         print(f"Prefs : {prefs}\n")
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
@@ -123,6 +124,12 @@ def update_library(request, id):
             'book' : book,
             'notes' : notes,
         }
+        spread_score = book.note_set.values('rate')
+        current_score = 0
+        for score in spread_score:
+            current_score += score['rate']
+        
+        book.update(score=current_score)
         messages.success(request, 'Library have been updated')
         return render(request, 'user_update.html', context)
     else:
