@@ -11,9 +11,13 @@ class Profile(models.Model):
     avatar = models.FileField(upload_to='avatar/', default='avatar/default-avatar.png')
     account_created = models.DateField(null=True, blank=True)
     
-
 # class Book(models.Model):
 #     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+class Review(models.Model):
+    review = models.TextField(null=True)
+    book = models.ForeignKey('Library', on_delete=models.CASCADE, null=True)
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)
 
 class Note(models.Model):
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True)

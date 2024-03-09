@@ -1,0 +1,26 @@
+{% extends 'base-book.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+{% block content %}
+<section class='view-book'>
+    <div class='view-book-img'>
+        <img src={{ book.cover.url }} width='220' height='310' style="object-fit: cover;">
+    </div>
+    <div class='view-book-desc'>
+        <h1 class='inline'><bold>{{ book.title }}</bold></h1><span>  by {{ book.author }}</span>
+        <br>
+        <hr>
+        <br>
+        <p>Author : {{ book.author }} at {{ author.medsos }} </p>
+        <p>Book Type : {{ book.book_type }}</p>
+        <p>Series Status : {{ book.series_status }}</p>
+        <p>Genre : {{ book.genre }}</p>
+        <p>Score : {{ book.score }}</p>
+    </div>
+</section>
+{% endblock %}

@@ -46,8 +46,8 @@ input, select {
 }
 
 /* ============================== NAVBAR ============================== */
-header, section {
-    width: 80%;
+section, header {
+    width: 85%;
     margin: auto;
 }
 
@@ -163,9 +163,9 @@ header {
 .user .map { 
     flex: 1; 
 }
-.user .map li { margin-bottom: 10px; width: 50%; }
+.user .map li { margin-bottom: 10px; width: 70%; }
 .user .map a { padding-right: 20px; }
-.user .content {flex: 3; }
+.user .content {flex: 4; }
 .user form p { margin-bottom: 20px; display: flex; width: 80%; justify-content: space-between;}
 .user form input { width: 70%; }
 
@@ -176,14 +176,24 @@ header {
     display: flex;
     flex-wrap: wrap;
     row-gap: 50px;
-    column-gap: 20px;
+    column-gap: 25px;
 }
 .lib-item {
     text-align: center;
-    max-width: 185px; 
+    max-width: 220px; 
     cursor: pointer;
 }
-
+.recc .lib-item {
+    margin: auto;
+}
+.recc .lib-item {
+    text-align: center;
+    max-width: 215px; 
+    cursor: pointer;
+}
+.lib-item img {
+    border-radius: 15px;
+}
 .lib-item span { 
     text-align: center;
     align-items: center;
@@ -194,7 +204,9 @@ header {
     transition: all .5s;
 }
 .errorlist { display: none; }
+/* =================================================================== */
 /* ============================== UPDATE PAGE======================== */
+/* =================================================================== */
 .history {
     width: 100%;
     margin-bottom: 200px;
@@ -210,4 +222,31 @@ textarea {
     background: var(--backgroundShade);
     border: 1px solid black;
     padding: 10px;
+}
+/* =================================================================== */
+/* ============================== BOOK PAGE======================== */
+/* =================================================================== */
+
+.view-book {
+    display: flex;
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+.view-book-img { 
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+}
+.view-book-img img {
+    border-radius: 15px;
+}
+.view-book-desc {
+    flex: 2;
+}
+.view-book-desc p {
+    margin-bottom: 12px;
+}
+.view-book-desc .inline {
+    display: inline;
 }

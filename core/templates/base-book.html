@@ -13,15 +13,15 @@
     </head>
     <body>
         <header>
-            <a href='/signup'>follow us</a>
+            <a href='#'>follow us</a>
             <a href='/'>
                 <img src={% static 'img/mabu.png' %} height=45>
             </a>
             {% if user %}
                 <div class='dropdown'>
-                    <button class='hover'>{{ user.username }}</button>
+                    <button>{{ user.username }}</button>
                     <div class='dropdown-content'>
-                        <a href='/profile'>profile</a>
+                        <a href='#'>profile</a>
                         <a href='/library'>library</a>
                         <a href='/add-books'>add books</a>
                         <a href='/logout'>logout</a>
@@ -32,7 +32,6 @@
             {% endif %}
         </header>
         {% block content %}
-        
         {% endblock %}
     </body>
 </html>

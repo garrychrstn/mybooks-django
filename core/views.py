@@ -26,6 +26,7 @@ def index(response):
             combined_pref != query
         
         filtered_queryset = Library.objects.filter(combined_pref)[:5]
+
         print(f"Prefs : {prefs}\n")
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
@@ -224,3 +225,15 @@ def signup(request):
 
 def success(response):
     return render(response, 'success.html')
+
+
+@login_required
+def viewBook(response, id):
+    user = response.user
+    book = Library.objects.get(pk=id)
+
+    context = {
+        'user' : user,
+        'book' : book
+    }
+    return render(response, 'view-book.html', context)
