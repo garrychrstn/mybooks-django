@@ -126,10 +126,14 @@ def update_library(request, id):
         }
         spread_score = book.note_set.values('rate')
         current_score = 0
+        amount_score = len(spread_score)
         for score in spread_score:
             current_score += score['rate']
+
+        total_score = current_score / amount_score
         
-        book.update(score=current_score)
+        book.score = total_score
+        book.save(update_fields=["score"])
         messages.success(request, 'Library have been updated')
         return render(request, 'user_update.html', context)
     else:

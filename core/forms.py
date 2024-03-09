@@ -34,7 +34,7 @@ class AddBook(forms.ModelForm):
 class UpdateBook(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['volume', 'note']
+        fields = ['volume', 'note', 'rate']
 
 class RegisterForm(UserCreationForm):
 

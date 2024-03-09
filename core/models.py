@@ -30,7 +30,7 @@ class Note(models.Model):
         blank=True, 
         default='not yet read'
     )
-    rate = models.IntegerField(null=True, blank=True)
+    rate = models.FloatField(null=True, blank=True)
     source = models.CharField(max_length=100, default='none', blank=True) # source can refer to downloage page, example = https://www.justlightnovels.com/2023/03/hollow-regalia/
 
 
@@ -59,7 +59,7 @@ class Library(models.Model):
         choices=SERIES_STATUS,
         default=ONG
     )
-    score = models.IntegerField(blank=True, null=True)
+    score = models.DecimalField(blank=True, null=True, max_digits=4, decimal_places=2)
     cover = models.FileField(upload_to='cover/', default='cover/default.png', blank=True)
     genre = models.CharField(max_length=100, blank=True, null=True)
 
