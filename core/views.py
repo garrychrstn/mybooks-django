@@ -17,28 +17,39 @@ def index(response):
     user = None
     if response.user.is_authenticated:
         user = response.user
+        p = user.profile
+        added = p.library_set.all()
         pref_array = user.profile.preference.split(",") # Create array from preference so it can be used with for loop
         prefs = [x.strip(' ') for x in pref_array]
         queries = [Q(genre__contains=pref) for pref in pref_array]
-
         combined_pref = queries[0]
         for query in queries[1::]:
             combined_pref != query
         
         filtered_queryset = Library.objects.filter(combined_pref)
-        randomed = list(filtered_queryset)
+        recc = filtered_queryset.exclude(pk__in=added.values_list('pk', flat=True))
+        randomed = list(recc)
         ran_rec = random.sample(randomed, 5)
 
-        print(f"Prefs : {prefs}\n")
-        print(f"Queries : {queries}\n")
-        print(f"Combined Pref: {combined_pref}\n")
-        print(f"Filtered Query : {filtered_queryset}")
+        print(added)
+        print(f"user id : {user.id}")
+        print(f"profile id : {p.id}")
+        print('=========== This is my Library ===========')
+        for mybook in added:
+            print(f"{mybook.title} : {mybook.id}")
+        print('=========== This is the Recommended ===========')
+        for b in recc:
+            print(f"{b.title} : {b.id}")
+        print('=========== End ===========')
+
         context = {
             'user' : user,
             'pref_array' : pref_array,
             'ran_rec' : ran_rec
         }
-    return render(response, 'index.html', context)
+        return render(response, 'index.html', context)
+    else:
+        return render(response, 'index.html')
 
 def login_request(request):
     if request.method == 'POST':
