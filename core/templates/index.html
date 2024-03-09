@@ -11,7 +11,7 @@
         <h1>For you</h1>
         <br>
         <div class='lib-container'>
-            {% for book in filtered_queryset %}
+            {% for book in ran_rec %}
                 <div class='lib-item'>
                     <a href='book/{{ book.id }}'>
                         <img src={{ book.cover.url }} width='215' height='305' style="object-fit: cover;">

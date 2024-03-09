@@ -25,13 +25,20 @@ def index(response):
         for query in queries[1::]:
             combined_pref != query
         
-        filtered_queryset = Library.objects.filter(combined_pref)[:5]
+        filtered_queryset = Library.objects.filter(combined_pref)
+        randomed = list(filtered_queryset)
+        ran_rec = random.sample(randomed, 5)
 
         print(f"Prefs : {prefs}\n")
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
         print(f"Filtered Query : {filtered_queryset}")
-    return render(response, 'index.html', {'user' : user, 'pref_array' : pref_array, 'filtered_queryset' : filtered_queryset})
+        context = {
+            'user' : user,
+            'pref_array' : pref_array,
+            'ran_rec' : ran_rec
+        }
+    return render(response, 'index.html', context)
 
 def login_request(request):
     if request.method == 'POST':
