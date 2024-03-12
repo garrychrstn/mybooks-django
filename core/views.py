@@ -251,6 +251,7 @@ def viewBook(request, id):
     user = request.user
     p = user.profile
     book = Library.objects.get(pk=id)
+    rev = Review.objects.filter(book=book)
     if request.method == "POST":
         book.profile.add(p)
 
@@ -261,7 +262,8 @@ def viewBook(request, id):
 
     context = {
         'user' : user,
-        'book' : book
+        'book' : book,
+        'rev' : rev
     }
     return render(request, 'view-book.html', context)
 
@@ -270,5 +272,6 @@ def searchBook(response):
         # Get the search query
         b = response.POST.get('book')
         books = Library.objects.filter(title__icontains=b)
+
         
     return render(response, 'search.html', {'books' : books, 'b' : b,})

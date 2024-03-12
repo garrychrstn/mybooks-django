@@ -28,6 +28,17 @@
         {% for msg in messages %}
             {{ msg }}
         {% endfor %}
+        <br>
+        <br>
+        <h2>User Review of this book : </h2>
+        <div class='review'>
+            {% for review in rev %}
+            <div class='notes'>
+                <h2>{{ review.profile.username }}</h4>
+                <small>{{ review.review }}</small>
+            </div><br>
+            {% endfor %}
+        </div>
     </div>
 </section>
 {% endblock %}
