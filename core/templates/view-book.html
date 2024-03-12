@@ -21,6 +21,10 @@
         <p>Series Status : {{ book.series_status }}</p>
         <p>Genre : {{ book.genre }}</p>
         <p>Score : {{ book.score }}</p>
+        <form method='POST' action=''>
+            {% csrf_token %}
+            <button type='submit'>add to library</button>
+        </form>
     </div>
 </section>
 {% endblock %}

@@ -2,7 +2,7 @@
 :root {
     --text: #02010d;
     --background: #f3f2fe;
-    --backgroundShade: #d1cfe0;
+    --bgShade: #d1cfe0;
     --primary: #322996;
     --secondary: #185083;
     --accent: #53c87a;
@@ -20,11 +20,16 @@ a, h1, h2, h3, h4, h5, span, p, button, input, textarea, small {
     color: var(--text);
 }
 li { list-style: none; }
-.button {
-    padding: 5px 10px; 
-    background: var(--text);
+button {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--background);
+    border: 2px solid var(--primary);
+}
+button:hover {
+    background: var(--primary);
     color: var(--background);
-    border: none;
+    transition: .5s;
 }
 .user-active {
      border-right: 2px solid black; 
@@ -60,13 +65,17 @@ header {
     border-bottom: 6px double black;
     margin-bottom: 30px;
 }
-
+.green-border:hover {
+    border-bottom: 2px solid var(--accent);
+}
 .dropdown button {
     background: var(--background);
     font-size: 20px;
     border: none; 
   }
-  
+.dropdown button:hover {
+    border-bottom: 2px solid var(--accent);
+}
 .dropdown {
     font-size: 20px;
     position: relative;
@@ -89,7 +98,10 @@ header {
     text-decoration: none;
     display: block;
   }
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+    border-bottom: 2px solid var(--accent);
+    background: var(--bgShade);
+}
 
 .dropdown:hover .dropdown-content {display:block;}
 /* =================================================================== */
@@ -147,7 +159,7 @@ header {
 .joinus p, .joinus h1, .joinus small { color: white; }
 .joinus p { margin-bottom: 20px; }
 .joinus a {
-    background: var(--backgroundShade);
+    background: var(--bgShade);
     padding: 10px 15px; 
     border-radius: 20px; 
 }
@@ -212,14 +224,14 @@ header {
     margin-bottom: 200px;
 }
 .notes { 
-    background: var(--backgroundShade);
+    background: var(--bgShade);
     border: 1px solid black; 
     padding: 15px; 
     border-radius: 20px; 
 }
 textarea {
     width: 69%;
-    background: var(--backgroundShade);
+    background: var(--bgShade);
     border: 1px solid black;
     padding: 10px;
 }
@@ -249,4 +261,15 @@ textarea {
 }
 .view-book-desc .inline {
     display: inline;
+}
+button {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--background);
+    border: 2px solid var(--primary);
+}
+button:hover {
+    background: var(--primary);
+    color: var(--background);
+    transition: .5s;
 }

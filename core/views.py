@@ -76,7 +76,7 @@ def login_request(request):
 @login_required
 def addBook(request):
     user = request.user
-    p = Profile.objects.get(username=user.id)
+    p = user.profile
 
     if request.method == 'POST':
         form = AddBook(request.POST, request.FILES)
@@ -112,7 +112,7 @@ def addBook(request):
 @login_required
 def library(request):
     user = request.user
-    p = Profile.objects.get(username=user.id)
+    p = user.profile
     user_book = p.library_set.all()
     print(user_book)
     context = {
@@ -124,7 +124,7 @@ def library(request):
 @login_required
 def update_library(request, id):
     user = request.user
-    pr = Profile.objects.get(username=user.id)
+    pr = user.profile
     book = Library.objects.get(pk=id)
     print(f"{book} and {pr}")
     # update = Note.objects.get(book=book.id, profile=pr.id)
@@ -246,12 +246,20 @@ def success(response):
 
 
 @login_required
-def viewBook(response, id):
-    user = response.user
+def viewBook(request, id):
+    user = request.user
+    p = user.profile
     book = Library.objects.get(pk=id)
+    if request.method == "POST":
+        book.profile.add(p)
 
+        messages.success(request, "Book added to your library")
+        
+    else :
+        pass
+    
     context = {
         'user' : user,
         'book' : book
     }
-    return render(response, 'view-book.html', context)
+    return render(request, 'view-book.html', context)
