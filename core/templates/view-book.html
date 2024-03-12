@@ -25,6 +25,9 @@
             {% csrf_token %}
             <button type='submit'>add to library</button>
         </form>
+        {% for msg in messages %}
+            {{ msg }}
+        {% endfor %}
     </div>
 </section>
 {% endblock %}

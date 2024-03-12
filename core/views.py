@@ -19,9 +19,10 @@ def index(response):
         user = response.user
         p = user.profile
         added = p.library_set.all()
-        pref_array = user.profile.preference.split(",") # Create array from preference so it can be used with for loop
-        prefs = [x.strip(' ') for x in pref_array]
-        queries = [Q(genre__contains=pref) for pref in pref_array]
+        # Reccomendation algorithm, based on User preferred genre,
+        pref_array = user.profile.preference.split(",") # Create an array of user's preference
+        prefs = [x.strip(' ') for x in pref_array] # Clean the array
+        queries = [Q(genre__contains=pref) for pref in pref_array] # 
         combined_pref = queries[0]
         for query in queries[1::]:
             combined_pref != query
@@ -257,9 +258,17 @@ def viewBook(request, id):
         
     else :
         pass
-    
+
     context = {
         'user' : user,
         'book' : book
     }
     return render(request, 'view-book.html', context)
+
+def searchBook(response):
+    if response.method == 'POST':
+        # Get the search query
+        b = response.POST.get('book')
+        books = Library.objects.filter(title__icontains=b)
+        
+    return render(response, 'search.html', {'books' : books, 'b' : b,})

@@ -8,6 +8,11 @@
 {% block content %}
     {% if user.is_authenticated %}
     <section class='recc'>
+        <form class='search' method='POST' action='search/'>
+            {% csrf_token %}
+            <input type='text' placeholder='Search books' name='book'>
+            <button type='submit'>search</button>
+        </form>
         <h1>For you</h1>
         <br>
         <div class='lib-container'>

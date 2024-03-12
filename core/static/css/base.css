@@ -43,7 +43,7 @@ input, textarea { outline: none; }
 input, select {
     background: var(--background);
     /* box-shadow: none; */
-    padding: 2px 6px; 
+    padding: 10px 12px; 
     border: 1px solid var(--text);
     border-top: none;
     border-left: none;
@@ -163,6 +163,11 @@ header {
     padding: 10px 15px; 
     border-radius: 20px; 
 }
+
+.search {
+    text-align: right;
+}
+
 /* =================================================================== */
 /* ============================ ADD BOOKS PAGE ======================= */
 /* =================================================================== */
