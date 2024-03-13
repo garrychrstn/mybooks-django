@@ -30,7 +30,10 @@ def index(response):
         print(f"Queries : {queries}\n")
         print(f"Combined Pref: {combined_pref}\n")
         print(f"Filtered Query : {filtered_queryset}")
-    return render(response, 'index.html', {'user' : user, 'pref_array' : pref_array, 'filtered_queryset' : filtered_queryset})
+        return render(response, 'index.html', {'user' : user, 'pref_array' : pref_array, 'filtered_queryset' : filtered_queryset})
+    else:
+        pass
+        return render(response, 'index.html')
 
 def login_request(request):
     if request.method == 'POST':
